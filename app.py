@@ -82,22 +82,31 @@ def main():
     #st.write(bot_template.replace("{{MSG}}", "Hi there! What would you like to know?"), unsafe_allow_html=True)
 
     with st.sidebar:
+        st.subheader("Manage Chat")
+        if st.button("Reset Conversation"):
+            st.session_state.conversation = None
+            st.session_state.chatHistory = None
+            st.rerun()
+        
         st.subheader("Your documents")
         pdfDocs = st.file_uploader(
             "Upload your PDFs here and click on 'Process'", accept_multiple_files=True)
         if st.button("Process"):
-            with st.spinner("Processing"):
-                # get raw pdf text
-                rawText = getPDFText(pdfDocs)
+            if not pdfDocs:
+                st.warning("⚠️ Please upload a PDF file first.")
+            else:
+                with st.spinner("Processing"):
+                    # get raw pdf text
+                    rawText = getPDFText(pdfDocs)
 
-                # get the text chunks
-                textChunks = getTextChunks(rawText)
+                    # get the text chunks
+                    textChunks = getTextChunks(rawText)
 
-                # create vector store
-                vectorstore = getVectorStore(textChunks)
+                    # create vector store
+                    vectorstore = getVectorStore(textChunks)
 
-                # create conversation chain
-                st.session_state.conversation = getConversationChain(vectorstore)
+                    # create conversation chain
+                    st.session_state.conversation = getConversationChain(vectorstore)
 
 
 if __name__ == '__main__':
