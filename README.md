@@ -64,6 +64,12 @@ A Retrieval-Augmented Generation (RAG) application that enables users to "chat" 
 3.  Click **"Process"** to build the vector index.
 4.  Type your question in the chat input to query your documents.
 
+## Dashboard Preview
+<img width="2858" height="1208" alt="1" src="https://github.com/user-attachments/assets/ab7f9f98-3d2a-4911-bcc1-fc77a30fa49e" />
+
+
+
+
 ## Future Improvements
 
 * Add support for other file formats (DOCX, TXT).
