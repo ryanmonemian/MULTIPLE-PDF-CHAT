@@ -19,7 +19,7 @@ A Retrieval-Augmented Generation (RAG) application that enables users to "chat" 
 * **Frontend:** [Streamlit](https://streamlit.io/)
 * **Data Processing:** PyPDF2
 
-## ⚙️ How It Works
+## How It Works
 
 1.  **Ingestion:** The app reads uploaded PDF files and extracts raw text.
 2.  **Chunking:** Text is split into smaller, semantic chunks (e.g., 1000 characters) to fit within the context window.
@@ -27,7 +27,7 @@ A Retrieval-Augmented Generation (RAG) application that enables users to "chat" 
 4.  **Storage:** Vectors are stored locally in a FAISS index for fast retrieval.
 5.  **Retrieval & Generation:** When a user asks a question, the system finds the top 3-4 most similar text chunks and sends them to the LLM with the prompt: *"Answer the user's question using only this context."*
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 1.  **Clone the repository**
     ```bash
