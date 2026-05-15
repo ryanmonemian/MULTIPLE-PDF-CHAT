@@ -1,12 +1,16 @@
+# .\venv\Scripts\activate
+# streamlit run app.py
+    
 import streamlit as st
 from dotenv import load_dotenv
 from PyPDF2 import PdfReader
-from langchain.text_splitter import CharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
+from langchain_text_splitters import CharacterTextSplitter
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_community.vectorstores import FAISS
-from langchain_openai import ChatOpenAI
-from langchain.memory import ConversationBufferMemory
-from langchain.chains import ConversationalRetrievalChain
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
 from htmlTemplates import css, bot_template, user_template
 
 def getPDFText(pdfDocs):
@@ -36,21 +40,39 @@ def getVectorStore(textChunks):
 
 def getConversationChain(vectorstore):
     llm = ChatOpenAI()
-    memory = ConversationBufferMemory(memory_key='chat_history', return_messages=True)
-    conversationChain = ConversationalRetrievalChain.from_llm(
-        llm=llm,
-        retriever=vectorstore.as_retriever(),
-        memory=memory
+    retriever = vectorstore.as_retriever()
+
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", "Answer the user's question using only the context below.\n\nContext: {context}"),
+        MessagesPlaceholder(variable_name="chat_history"),
+        ("human", "{input}")
+    ])
+
+    chain = (
+        RunnablePassthrough.assign(
+            context=lambda x: "\n\n".join(doc.page_content for doc in retriever.invoke(x["input"]))
+        )
+        | prompt
+        | llm
+        | StrOutputParser()
     )
-    return conversationChain
+    return chain
 
 
 def handleUserInput(userQuestion):
-    response = st.session_state.conversation({'question': userQuestion})
-    st.session_state.chat_history = response['chat_history']
+    if st.session_state.chat_history is None:
+        st.session_state.chat_history = []
 
-    for i, message in enumerate(st.session_state.chat_history):
-        if i % 2 == 0:
+    answer = st.session_state.conversation.invoke({
+        "input": userQuestion,
+        "chat_history": st.session_state.chat_history
+    })
+
+    st.session_state.chat_history.append(HumanMessage(content=userQuestion))
+    st.session_state.chat_history.append(AIMessage(content=answer))
+
+    for message in st.session_state.chat_history:
+        if isinstance(message, HumanMessage):
             st.write(user_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
         else:
             st.write(bot_template.replace("{{MSG}}", message.content), unsafe_allow_html=True)
