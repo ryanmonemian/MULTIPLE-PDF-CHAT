@@ -1,0 +1,42 @@
+[
+  {
+    "question": "Where is the Professor's office located?",
+    "ground_truth": "3675 Market Street Room 1063 (near snack machine)"
+  },
+  {
+    "question": "What will I be learning for Lectures 9 and 10?",
+    "ground_truth": "Lecture 9: Equational Reasoning, Lecture 10: High Order Functions"
+  },
+  {
+    "question": "Are there any quizzes and/or exams? How many and what are they worth?",
+    "ground_truth": "There will be two exams, both held in class. Midterm is worth 25% and is in Week 6. Final is worth 25% and is during Finals Week."
+  },
+  {
+    "question": "What is the professor's name?",
+    "ground_truth": "Professor Mark Boady"
+  },
+  {
+    "question": "What 9 topics will I learn in this class?",
+    "ground_truth": "Functional Programming, Recursion Recursive Definitions and Induction, Propositional and Predicate Logic, Formal Proof using Natural Deduction, Applications of Logic to Computer Science, Divide and Conquer Algorithms and Recurrence Relations, Program Specification and Verification, Automated Reasoning, Test Case and Counter Example Generation"
+  },
+  {
+    "question": "What is the exact grading breakdown?",
+    "ground_truth": "Homeworks: 30%, Labs: 20%, Midterm Exam: 25%, Final Exam: 25%"
+  },
+  {
+    "question": "What are the prerequisites for this course?",
+    "ground_truth": "CS 172 Minimum Grade: D or CS 176 Minimum Grade: D or CS 265 Minimum Grade: D or SE 103 Minimum Grade: D or ECEC 301 Minimum Grade: D or ECEC 201 Minimum Grade: D"
+  },
+  {
+    "question": "What is the late penalty for homeworks?",
+    "ground_truth": "-10% 1 day late, -20% 2 days late, -30% 3 days late, -40% 4 days late, not accepted after 4 days. Each student has two late passes which can be exchanged for 1 extra day on a homework with no penalty."
+  },
+  {
+    "question": "What is the textbook for this class?",
+    "ground_truth": "Professor Boady's Readings at https://logic.boady.net/README.html"
+  },
+  {
+    "question": "What programming language will be used in this class?",
+    "ground_truth": "The Racket Programming Language"
+  }
+]

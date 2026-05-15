@@ -21,7 +21,6 @@ def getPDFText(pdfDocs):
             text += page.extract_text()
     return text
 
-
 def getTextChunks(text):
     textSplitter = CharacterTextSplitter(
         separator="\n",
