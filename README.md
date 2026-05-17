@@ -64,6 +64,9 @@ A Retrieval-Augmented Generation (RAG) application that enables users to "chat" 
 3.  Click **"Process"** to build the vector index.
 4.  Type your question in the chat input to query your documents.
 
+## Evaluation
+Answer faithfulness was measured using the RAGAS framework on a 10-question test set derived from a course syllabus PDF, achieving a faithfulness score of 89-95% across multiple runs.
+
 ## Dashboard Preview
 <img width="2858" height="1208" alt="1" src="https://github.com/user-attachments/assets/ab7f9f98-3d2a-4911-bcc1-fc77a30fa49e" />
 
